@@ -1,0 +1,24 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - Flask</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>Navigation</h1>
+  {% block nav %}
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/image_upload/">Image Uploader</a></li>
+      <li><a href="/reorder/">Image Reorder</a></li>
+      <li><a href="/delete/">Image Deleter</a></li>
+      <li><a href="/documentation/">Documentation</a></li>
+    </ul>
+{% endblock %}
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>

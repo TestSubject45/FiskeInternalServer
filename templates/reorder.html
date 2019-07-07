@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block header %}
+	  <h1>{% block title %}Image Reorder{% endblock %}</h1>
+	  	  <style>
+  #sortable li {}
+  		</style>
+	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  		<script>
+  			$( function() {
+    			$( "#sortable" ).sortable();
+    			$('button').button().click(function(){
+ 					var itemOrder = $('#sortable').sortable("toArray");
+ 					$.ajax({type:'POST',url:'/reorder/',data:{'itemOrder':itemOrder.toString()},success: function(){}});
+ 				})
+    		})
+  		</script>
+{% endblock %}
+
+{% block content %}
+<h3>Currently Uploaded Images:</h3>
+<ul id="sortable">
+	{% for image in data.uploaded_images %}
+		<li id="{{image[0]}}">{{ image }}<br></li>
+	{% endfor %}
+</ul>
+<div id="submit"><button>Submit Order</button></div>
+
+{% endblock %}

@@ -1,0 +1,127 @@
+/* NAVIGATION */
+nav{
+	display: flex;
+}
+
+nav h1{
+	display: inline-block;
+	line-height:1e;
+	background-color: grey;
+	color: white;
+	width:15%;
+
+}
+nav ul{
+	width:10%;
+	background-color: #f0f0f0;
+
+}
+nav li,nav li a{
+	text-decoration: none;
+	list-style-type:none;
+	color:black;
+}
+nav li a:hover{
+	color:gold;
+}
+
+/*UPLOADED IMAGES */
+ul.uploaded_images{
+
+	display: flex;
+
+}
+
+ul.uploaded_images li{
+
+	list-style-type: none;
+	height:20;
+
+}
+/*SORTABLE LIST */
+#sortable{
+	list-style-type: none;
+	display:flex;
+	width: 40%;
+	flex-direction: column;
+	background-color: grey;
+	padding:5px;
+}
+#sortable li{
+	background-color: #f3f3f3;
+	border: 1px solid black;
+	margin: 0 3px 3px 3px;
+	padding: 0.5em;
+	padding-left: 1.5em;
+	font-size: 1.4em;
+	height: 20px; 
+}
+
+/*DELETE IMAGES */
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a black background */
+.container input:checked ~ .checkmark {
+  background-color: #000000;/*was #2196F3 */
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid gold;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
