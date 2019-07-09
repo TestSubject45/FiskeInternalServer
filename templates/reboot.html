@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block header %}
+	  <h1>{% block title %}Reboot{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<h3>WARNING: THE BELOW BUTTON REBOOTS THE CUBE</h3>
+<H3>PRESS AT OWN RISK</H3>
+<a href="/rebooter/">REBOOT NOW</a>
+{% endblock %}

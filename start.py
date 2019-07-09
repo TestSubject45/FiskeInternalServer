@@ -100,6 +100,13 @@ def Uploads(filename):
 def documentation():
 	return render_template("documentation.html")
 
+@app.route("/reboot/")
+def reboot():
+	return render_template("reboot.html")
+
+@app.route("/rebooter/")
+def rebooter():
+	os.system("sudo reboot now")
 
 if __name__ == '__main__':
 	app.run(debug = True)
