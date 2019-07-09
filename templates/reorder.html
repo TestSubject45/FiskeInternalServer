@@ -22,7 +22,7 @@
 <h3>Currently Uploaded Images:</h3>
 <ul id="sortable">
 	{% for image in data.uploaded_images %}
-		<li id="{{image[0]}}">{{ image }}<br></li>
+		<li id="{{image[2]}}">{{ image }}<br></li>
 	{% endfor %}
 </ul>
 <div id="submit"><button>Submit Order</button></div>
