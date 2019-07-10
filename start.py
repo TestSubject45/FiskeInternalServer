@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask, render_template,request, send_from_directory
 from werkzeug import secure_filename
 import os
@@ -17,7 +18,7 @@ def uploaded_images():
 	try:
 		out = sorted(os.listdir(imgPath))
 		return out
-	except FileNotFoundError as e:
+	except:
 		return "<p>Error: Can't find "+imgPath+"</p>"
 
 ##################################################################
@@ -53,7 +54,6 @@ def uploader():
 def reorder():
 	if request.method=="POST":
 		order = request.form.getlist('itemOrder')[0].split(",")
-		
 		fileList = sorted(os.listdir(imgPath))
 
 		newList = []
