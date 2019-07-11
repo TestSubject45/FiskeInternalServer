@@ -6,7 +6,7 @@ from os.path import isfile, join
 
 app = Flask(__name__)
 
-imgPath = "Uploads/"
+imgPath = "/home/cubicawe/Desktop/Fiske-Cube-SerialSendReceive/data/"
 app.config['UPLOAD_FOLDER'] = imgPath
 
 
@@ -41,10 +41,17 @@ def uploader():
 
 		#Get number of files in folder
 		numFiles = len(os.listdir(imgPath))
-		#this is appended to front of the file for ordering 
+		#this is appended to front of the file for ordering
 
 		file = request.files['file']
-		filename = secure_filename(str(numFiles)+' '+file.filename)
+		filename = secure_filename(file.filename)
+		if filename[0:2].isdigit()==False:
+			tempFN = str(numFiles).zfill(3)
+			tempFN = tempFN+"_"+filename
+			filename = tempFN
+		elif filename[0:2].isDigit():
+			filename[0:2] = len(os.listdir(imgPath)).zfill(3)
+		filename = secure_filename(str(filename))
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
 		return ('File successfully uploaded<br>'
 				'Folder now contains '+str(numFiles+1)+' images.<br>'
@@ -57,7 +64,7 @@ def reorder():
 		fileList = sorted(os.listdir(imgPath))
 
 		newList = []
-		print("Order: ",order)
+		#print("Order: ",order)
 		for item in order:
 			newList.append(fileList[int(item)])
 
@@ -84,11 +91,12 @@ def delete():
 		for i in range(0,len(temp)-1):
 			toDelete.append(temp[i])
 		for item in toDelete:
-			flash(imgPath+item)
 			os.remove(imgPath+item)
+
 		data = {'uploaded_images':uploaded_images()}
 		return render_template('delete.html',data=data)
-	else:
+	elif(request.method=="GET"):
+		print("GET")
 		data = {'uploaded_images':uploaded_images()}
 		return render_template('delete.html',data=data)
 

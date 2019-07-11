@@ -2,21 +2,22 @@
 
 {% block header %}
 	  <h1>{% block title %}Image Delete{% endblock %}</h1>
-  	    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	  <script type="text/javascript">
 			$( function() {
-	    		$('button').button().click(function(){
-					var items=document.getElementsByName('acs');
+	    			$('button').button().click(function(){
+					event.preventDefault();
+					var items=document.getElementsByName('del');
 					var selectedItems="";
 					for(var i=0; i<items.length; i++){
 						if(items[i].type=='checkbox' && items[i].checked==true)
 							selectedItems+=items[i].value+"\n";
 					}
-					$.ajax({type:'POST',url:'/delete/',data:{'toDelete':selectedItems.toString()},success: function(){}});
+					console.log("SENDING");
+					$.ajax({type:"POST",url:"/delete",data:{"toDelete":selectedItems.toString()}});
+					alert("Done, please reload the page")
 				})
 			})
-		</script>
+	</script>
 {% endblock %}
 
 {% block content %}
@@ -24,7 +25,7 @@
  <form action="/delete/">
 	{% for image in data.uploaded_images %}
 		<label class="container">
-			<input type="checkbox" name="acs" value="{{image}}"><img src="{{url_for('Uploads',filename=image)}}" width="40px" height="40px"/><span class="checkmark"></span>{{ image }}</br>
+			<input type="checkbox" name="del" value="{{image}}"><img src="{{url_for('Uploads',filename=image)}}" width="40px" height="40px"/><span class="checkmark"></span>{{ image }}</br>
 		</label>
 	{%endfor%}
 <div id="submit"><button>Submit Delete</button></div>
