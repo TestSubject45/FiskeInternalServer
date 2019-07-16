@@ -46,11 +46,11 @@ def uploader():
 		file = request.files['file']
 		filename = secure_filename(file.filename)
 		if filename[0:2].isdigit()==False:
-			tempFN = str(numFiles).zfill(3)
+			tempFN = str(numFiles-1).zfill(3)
 			tempFN = tempFN+"_"+filename
 			filename = tempFN
-		elif filename[0:2].isDigit():
-			filename[0:2] = len(os.listdir(imgPath)).zfill(3)
+		elif filename[0:2].isdigit():
+			filename[0:2] = str(numFiles-1).zfill(3)
 		filename = secure_filename(str(filename))
 		file.save(os.path.join(app.config['UPLOAD_FOLDER'],filename))
 		return ('File successfully uploaded<br>'
@@ -64,8 +64,9 @@ def reorder():
 		fileList = sorted(os.listdir(imgPath))
 
 		newList = []
-		#print("Order: ",order)
+		print("Order: ",order)
 		for item in order:
+			print(int(item))
 			newList.append(fileList[int(item)])
 
 		for i in range(0,len(fileList)):
@@ -114,7 +115,10 @@ def reboot():
 
 @app.route("/rebooter/")
 def rebooter():
-	os.system("sudo reboot now")
+	os.system("sudo shutdown -r -t 2")
+	print("Reboot Signal Sent")
+	return render_template("rebooting.html")
+
 
 if __name__ == '__main__':
 	app.run(debug = True)
